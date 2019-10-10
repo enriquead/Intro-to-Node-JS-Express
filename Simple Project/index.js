@@ -9,22 +9,7 @@ app.engine('mustache',hoganMiddleware.__express)
 
 //La siguiente línea Establece que los static assets estan en public
 app.use(express.static(path.join(__dirname,'public'))) 
-/*
-app.get('/',(req,res,next)=>{
-    res.send('Hello World')
-})
 
-app.get('/json',(req,res,next)=>{
-    const data= {
-        greeting: 'Hello'
-    }
-    res.json(data)
-})
-
-app.get('/home',(req,res,next)=>{
-    res.render('home',null)
-})
-*/
 
 const indexRouter = require('./routes/index')
 app.use('/',indexRouter)
