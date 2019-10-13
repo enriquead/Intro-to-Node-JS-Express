@@ -10,24 +10,32 @@ router.get('/', (req, res) => {
 	res.render('index', {text: 'This is the dynamic data. Open index.js from the routes directory to see.'})
 })
 
-/*  This route render json data */
-router.get('/json', (req, res) => {
+router.get('/query',(req,res)=>{ //Los parámetros de Query van con ?clave=valor. Para poner más & y siguiente
+	const name = req.query.name
+	const occupation = req.query.occupation
+	const data = {
+		name: name,
+		occupation: occupation
+	}
+	res.render('profile',data);
+})
+
+router.get('/:path', (req,res) =>{
+	const path = req.params.path; // En express todo request tiene un params asociado
 	res.json({
-		confirmation: 'success',
-		app: process.env.TURBO_APP_ID,
-		data: 'this is a sample json route.'
+		data: path
 	})
 })
 
-/*  This route sends text back as plain text. */
-router.get('/send', (req, res) => {
-	res.send('This is the Send Route')
+router.get('/:profile/:username', (req,res) =>{
+	const profile = req.params.profile; 
+	const username = req.params.username;
+	res.json({
+		profile: profile,
+		username: username
+	})
 })
 
-/*  This route redirects requests to Turbo360. */
-router.get('/redirect', (req, res) => {
-	res.redirect('https://www.turbo360.co/landing')
-})
 
 
 module.exports = router
